@@ -23,6 +23,7 @@
   (require 'jmaker)
   (require 'jsee)
   (setq jmaker-end-of-line-format (quote dos))
-  (setq jmaker-java-compiler-options ""))
+  (setq jmaker-java-compiler-options "")
+  (setq jde-enable-abbrev-mode t))
 
 (provide 'jain-jdee-config)
