@@ -9,7 +9,6 @@
       (doxymacs-font-lock)))
 (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
 (doxymacs-mode);doxymacs-mode  true
-(global-set-key [(f6)] 'doxymacs-mode);doxymacs-mode  E   EF6]
 (add-hook 'c-mode-common-hook 'doxymacs-mode) ;;    doxymacs-mode
 (add-hook 'c++-mode-common-hook 'doxymacs-mode) ;;    doxymacs-mode
 

@@ -11,9 +11,14 @@
 )
 (define-key c-mode-base-map [(C-f5)] 'quick-compile)
 
+
 ;;;;;; ------------------------------------------------;;;;;;;;;;;
 ;;;;; --------------------Gdb-------------------;;;;;;;;;;;
-(require 'gdb-ui)
+(when (>= emacs-major-version 24)
+  (require 'gdb-mi))
+(when (= emacs-major-version 23)
+  (require 'gdb-ui))
+
 (defun gdb-or-gud-go ()
   "If gdb isn't running; run gdb, else call gud-go."
   (interactive)
@@ -54,12 +59,38 @@
 ;;              (define-key c-mode-base-map [C-f11] 'gud-finish)))
 (global-set-key [(f5)] 'gdb-or-gud-go)
 (global-set-key [S-f5] 'gud-kill)
-(global-set-key [(f6)] 'gud-next)
-(global-set-key [(f7)] 'gud-step)
-(global-set-key [C-f6] 'gud-until)
-(global-set-key [C-f7] 'gud-finish)
-(global-set-key [S-f7] 'gud-jump)
-(global-set-key [f8] 'gud-cont)
-(global-set-key [f9] 'gud-break-remove)
+;; (global-set-key [(f6)] 'gud-next)
+;; (global-set-key [(f7)] 'gud-step)
+;; (global-set-key [C-f6] 'gud-until)
+;; (global-set-key [C-f7] 'gud-finish)
+;; (global-set-key [S-f7] 'gud-jump)
+;; (global-set-key [f8] 'gud-cont)
+;; (global-set-key [f9] 'gud-break-remove)
+
+;; CFlow
+(add-to-list 'load-path "~/my-lisps/cflow-1.4/elisp/")
+(require 'cflow-mode)
+(defvar cmd nil nil)
+(defvar cflow-buf nil nil)
+(defvar cflow-buf-name nil nil)
+ 
+(defun yyc/cflow-function (function-name)
+  "Get call graph of inputed function. "
+  ;(interactive "sFunction name:\n")
+  (interactive (list (car (senator-jump-interactive "Function name: "
+                                                    nil nil nil))))
+  (setq cmd (format "cflow  -b --main=%s %s" function-name buffer-file-name))
+  (setq cflow-buf-name (format "**cflow-%s:%s**"
+                               (file-name-nondirectory buffer-file-name)
+                               function-name))
+  (setq cflow-buf (get-buffer-create cflow-buf-name))
+  (set-buffer cflow-buf)
+  (setq buffer-read-only nil)
+  (erase-buffer)
+  (insert (shell-command-to-string cmd))
+  (pop-to-buffer cflow-buf)
+  (goto-char (point-min))
+  (cflow-mode)
+  )
 
 (provide 'jain-c-mode-config)

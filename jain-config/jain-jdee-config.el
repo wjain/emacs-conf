@@ -23,6 +23,10 @@
   (require 'jmaker)
   (require 'jsee)
   (setq jmaker-end-of-line-format (quote dos))
-  (setq jmaker-java-compiler-options ""))
+  (setq jmaker-java-compiler-options "")
+  (setq jde-enable-abbrev-mode t))
+
+(defun screen-width nil -1)
+(define-obsolete-function-alias 'make-local-hook 'ignore "21.1")
 
 (provide 'jain-jdee-config)

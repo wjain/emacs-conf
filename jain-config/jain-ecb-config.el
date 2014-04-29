@@ -6,7 +6,7 @@
 
 ;(setq ecb-auto-activate t
 ;;     ecb-tip-of-the-day nil)
-
+(setq stack-trace-on-error t)
  
 
 (define-key global-map [(control f1)] 'ecb-hide-ecb-windows)
