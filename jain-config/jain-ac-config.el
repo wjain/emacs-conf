@@ -8,18 +8,18 @@
 ;; (setq ac-show-menu-timer 0.5)
 (setq ac-quick-help-delay 0.5)
 
-(require 'auto-complete-clang-async)
-;; (require 'auto-complete-clang)
+;; (require 'auto-complete-clang-async)
+(require 'auto-complete-clang)
 
 (defun my-ac-config ()
   (setq ac-clang-flags (list "-I/mingw/include" 
-                                      "-I/mingw/lib/gcc/mingw32/4.8.1/include/c++"
-                                      "-I/mingw/lib/gcc/mingw32/4.8.1/include/c++/backward"
-                                      "-I/mingw/lib/gcc/mingw32/4.8.1/include/c++/migw32"
-                                      "-I/mingw/lib/gcc/mingw32/4.8.1/include-fixed"
-                                      "-ID:/Program Files/Microsoft Visual Studio/VC98/Include"
-                                      "-ID:/Program Files/Microsoft Visual Studio/VC98/ATL/Include"
-                                      "-ID:/Program Files/Microsoft Visual Studio/VC98/MFC/Include"))
+                             "-I/mingw/lib/gcc/mingw32/4.8.1/include/c++"
+                             "-I/mingw/lib/gcc/mingw32/4.8.1/include/c++/backward"
+                             "-I/mingw/lib/gcc/mingw32/4.8.1/include/c++/migw32"
+                             "-I/mingw/lib/gcc/mingw32/4.8.1/include-fixed"
+                             "-ID:/Program Files/Microsoft Visual Studio/VC98/Include"
+                             "-ID:/Program Files/Microsoft Visual Studio/VC98/ATL/Include"
+                             "-ID:/Program Files/Microsoft Visual Studio/VC98/MFC/Include"))
   (setq-default ac-sources '(ac-source-abbrev
                              ac-source-dictionary
                              ac-source-words-in-same-mode-buffers))
