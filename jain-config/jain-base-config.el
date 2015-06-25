@@ -105,6 +105,16 @@
                       charset
                       (font-spec :family "Microsoft Yahei" :size 16)))
 
+(set-default-font "Dejavu Sans Mono 10")
+;;前面一串“(if...lambda...(with-select-frame frame ())...)"是个很好的函数框架，意思是frame创建后载入，用这个框架可以解决--daemon启动的问题
+;;只有set-fontset-font一句指定修改字符集'unicode的字体为文泉驿等宽微米黑，大小为12
+(if (and (fboundp 'daemonp) (daemonp))
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+                (with-selected-frame frame
+                  (set-fontset-font "fontset-default"
+				    'unicode "Microsoft YaHei 12"))))
+  (set-fontset-font "fontset-default" 'unicode "Microsoft YaHei 12"))
 (global-font-lock-mode t)
 (require 'highlight)
 (transient-mark-mode t)
@@ -185,6 +195,7 @@
 (add-hook 'c-mode-hook 'c-toggle-dot-pointer)
 (add-hook 'c++-mode-hook 'my-c-mode-auto-pair)
 (add-hook 'java-mode-hook 'my-c-mode-auto-pair)
+(add-hook 'python-mode-hook 'my-c-mode-auto-pair)
 
 (require 'tab-display)
 

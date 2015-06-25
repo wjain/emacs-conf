@@ -73,7 +73,7 @@
 
 
 (setq org-ditaa-jar-path "~/.emacs.d/plugins/ditaa/ditaa0_9.jar")
-                                        ;(setq org-plantuml-jar-path "~/java/plantuml.jar")
+(setq org-plantuml-jar-path "~/.emacs.d/plugins/plantuml/plantuml.jar")
 
 (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
@@ -244,6 +244,7 @@
    (dot . t)
    (latex . t)
    (js . t)
+   (plantuml . t)
    ))
 
 ;; 导出Beamer的设置
